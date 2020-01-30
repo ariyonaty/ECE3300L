@@ -30,11 +30,13 @@ module add_sub4bit(A, B, OP, Cout, R, Ov);
     output  Ov;     
 
     wire c1, c2, c3;
+    wire t1, t2, t3;
     
-    add_sub inst1 (A[0], B[0], OP, OP, c1, R[0]);
-    add_sub inst2 (A[1], B[1], c1, OP, c2, R[1]);
-    add_sub inst3 (A[2], B[2], c2, OP, c3, R[2]);
-    add_sub inst4 (A[3], B[3], c3, OP, Cout, R[3]);
+    //     add_sub(X,       Y, Cin, subIn,subOut, Cout, R);
+    add_sub inst1 (A[0], B[0], OP,  OP, t1, c1,     R[0]);
+    add_sub inst2 (A[1], B[1], c1,  t1, t2, c2,     R[1]);
+    add_sub inst3 (A[2], B[2], c2,  t2, t3, c3,     R[2]);
+    add_sub inst4 (A[3], B[3], c3,  t3, , Cout,   R[3]);
     
     xor (Ov, Cout, c3);
 

@@ -20,19 +20,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module add_sub(X, Y, Cin, subIn, Cout, R);
+module add_sub(X, Y, Cin, subIn, subOut, Cout, R);
 
     input X;
     input Y;
     input Cin;
     input subIn;
+    output subOut;
     output Cout;
     output R;
 
     wire w1;
     
+    buf(subOut, subIn);
     xor(w1, subIn, Y);
     
-    FA inst (X, w1, Cin, Cout, R);
+    //    fulladder(X, Y, Cin, Cout, S);
+    fulladder inst (X, w1, Cin, Cout, R);
 
 endmodule
