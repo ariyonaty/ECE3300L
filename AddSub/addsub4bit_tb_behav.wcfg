@@ -12,12 +12,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="11140001fs"></ZoomEndTime>
-      <Cursor1Time time="0fs"></Cursor1Time>
+      <ZoomEndTime time="8080001fs"></ZoomEndTime>
+      <Cursor1Time time="1550000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="127"></NameColumnWidth>
-      <ValueColumnWidth column_width="81"></ValueColumnWidth>
+      <ValueColumnWidth column_width="77"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="6" />
    <wvobject type="array" fp_name="/addsub4bit_tb/A">
@@ -46,6 +46,7 @@
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="CustomSignalColor">#FF0000</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/addsub4bit_tb/Ov">
       <obj_property name="ElementShortName">Ov</obj_property>
