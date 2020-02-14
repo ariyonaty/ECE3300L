@@ -12,12 +12,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="8080001fs"></ZoomEndTime>
-      <Cursor1Time time="1550000fs"></Cursor1Time>
+      <ZoomEndTime time="8100001fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="127"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <ValueColumnWidth column_width="73"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="6" />
    <wvobject type="array" fp_name="/addsub4bit_tb/A">
@@ -29,6 +29,7 @@
       <obj_property name="ElementShortName">B[3:0]</obj_property>
       <obj_property name="ObjectShortName">B[3:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/addsub4bit_tb/OP">
       <obj_property name="ElementShortName">OP</obj_property>

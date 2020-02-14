@@ -34,27 +34,28 @@ module addsub4bit_tb();
     
     
     // TESTING UNSIGNED NUMBERS
-//    initial begin
-//            A = 15; B = 5;  OP = 1;
-//        #1  A = 15; B = 5;  OP = 0;
-//        #1  A = 7;  B = 8;  OP = 0;
-//        #1  A = 5;  B = 10; OP = 1;
-//        #1  A = 15; B = 15; OP = 0;
-//        #1  A = 6;  B = 10; OP = 1;
-//        #1  A = 1;  B = 3;  OP = 1;
-//    end
+    initial begin
+            A = 15; B = 5;  OP = 1;
+        #1  A = 15; B = 5;  OP = 0;
+        #1  A = 7;  B = 8;  OP = 0;
+        #1  A = 5;  B = 10; OP = 1;
+        #1  A = 15; B = 15; OP = 0;
+        #1  A = 6;  B = 10; OP = 1;
+        #1  A = 1;  B = 3;  OP = 1; 
+        #1  $stop;
+    end
     
     
     // TESTING SIGNED NUMBERS
-    initial begin
-            A = 3;  B = 2;  OP = 0;
-        #1  A = -7; B = -3; OP = 0;
-        #1  A = 7;  B = 5;  OP = 1;
-        #1  A = -1; B = -5; OP = 0;
-        #1  A = 3;  B = 2;  OP = 1;
-        #1  A = -3; B = -2; OP = 1;
-        #1  A = -8; B = 2;  OP = 1;
-        #1  A = 5;  B = 5;  OP = 0;
-    end
+//    initial begin
+//            A = 3;  B = 2;  OP = 0;
+//        #1  A = -7; B = -3; OP = 0;
+//        #1  A = 7;  B = 5;  OP = 1;
+//        #1  A = -1; B = -5; OP = 0;
+//        #1  A = 3;  B = 2;  OP = 1;
+//        #1  A = -3; B = -2; OP = 1;
+//        #1  A = -8; B = 2;  OP = 1;
+//        #1  A = 5;  B = 5;  OP = 0;
+//    end
 
 endmodule
