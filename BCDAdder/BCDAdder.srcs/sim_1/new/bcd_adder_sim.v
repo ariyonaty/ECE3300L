@@ -29,24 +29,42 @@ module bcd_adder_sim();
     
     top uut (X, load, clk, R);
     
-    always
-        #5  clk = ~clk;
+    always #1 clk = ~clk; 
     
     initial begin
-            clk = 0;
-            X = 8'b01010101;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b01010101;
-        #1  X = 8'b10011001;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b10011001;
-        #1  X = 8'b10000111;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b01111000;
-        #1  X = 8'b00100101;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b01110101;
-        #1  X = 8'b00110011;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b01100110;
-        #1  X = 8'b01101001;            #1 load = 1; #1 load = 0;
-        #1  X = 8'b10010110;
-        #1  $stop;
+        clk = 0;    load = 0;   X = 0;
+//            X = 8'b0101_0101;    load = 1;   clk = 1'b0;   
+//        #2  X = 8'b0101_0101;    load = 0;
+//        #2  X = 8'b1001_1001;    load = 1;   
+//        #2  X = 8'b1001_1001;    load = 0;
+//        #2  X = 8'b1000_0111;    load = 1;
+//        #2  X = 8'b0111_1000;    load = 0;
+//        #2  X = 8'b0010_0101;    load = 1;
+//        #2  X = 8'b0111_0101;    load = 0;
+//        #2  X = 8'b0011_0011;    load = 1;
+//        #2  X = 8'b0110_0110;    load = 0;
+//        #2  X = 8'b0110_1001;    load = 1;
+//        #2  X = 8'b1001_0110;
+//        #2  $stop;
     end
+
+    /*TESTING 4 BIT ADDER*/
+    /*
+    reg [3:0] a, b;
+    reg cin;
+    wire cout;
+    wire [3:0] s;
+    
+    adder_4bit  uut (a, b, cin, cout, s);
+    
+    integer i;
+    
+    initial begin
+            a <= 0; b <= 0; cin <= 0;
+        for (i = 0; i < 5; i = i + 1) begin
+            #1 a <= $random;    b <= $random;   cin <= $random;
+        end
+        $stop;
+    end*/
 
 endmodule
