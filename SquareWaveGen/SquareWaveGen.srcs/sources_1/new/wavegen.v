@@ -21,15 +21,17 @@
 
 
 module wavegen
-    #(parameter delay = 100)
+//    #(parameter delay = 100)
     (
         input       clk,
         input       [7:0] t,
-        output reg  wave
+        output      wave
     );
     
-    reg [7:0] delayCounter = delay;
+    reg [7:0] delayCounter = 8'h64;
     reg [7:0] binCounter;
+    
+    reg q;
      
     wire [6:0] outDelay;
     wire nOutDelay;
@@ -39,7 +41,7 @@ module wavegen
 
     always @(posedge clk) begin
         if (nOutDelay)
-            delayCounter = delay;
+            delayCounter = 8'h64;
         else
              delayCounter <= delayCounter - 1'b1;
     end
@@ -56,7 +58,8 @@ module wavegen
     end    
     
     always @(posedge clk) begin
-        wave <= ~wave;
+        if (nOutT)
+            q = ~q;
     end
         
     assign outT = binCounter;
@@ -64,5 +67,7 @@ module wavegen
 
     assign outDelay = delayCounter;			
 	assign nOutDelay = ~(|outDelay);
-	    
+	
+	assign wave = q;
+	    	
 endmodule

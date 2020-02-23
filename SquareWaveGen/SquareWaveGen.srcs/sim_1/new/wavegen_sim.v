@@ -22,22 +22,20 @@
 
 module wavegen_sim();
 
-    parameter delay = 100;
+//    parameter delay = 100;
     
     reg     clk;
     reg     [7:0] t;
     wire    wave;
     
-    wavegen #(delay)    uut (clk, t, wave);
+//    wavegen #(delay)    uut (clk, t, wave);
+    sqwavegen uut (clk, t, wave);
     
     always #1 clk = ~clk;
     
     initial begin
-            t = 1;  clk = 1;
-        #50 t = 2;
-        #50 t = 3;
-        #50 t = 8;
-        #50 $stop;
+            clk = 1;
+        #200 $stop;
     end
 
 endmodule
