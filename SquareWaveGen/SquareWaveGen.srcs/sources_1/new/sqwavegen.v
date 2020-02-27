@@ -23,61 +23,55 @@ module sqwavegen
     #(parameter CLK_FREQ_OUT = 1_000_000)
     (
         input       clk,
-        input       switch,
-        output      wave
-    );
+        input       [7:0] switch,
+        output      delayWave,
+        output      binWave,
+        output      wave);
     
     localparam CLK_FREQ = 100_000_000;
 
-    integer counter = 0;
-    
-    reg sqwave = 0;
-    assign wave = sqwave;
-    
+    reg [7:0] counter = (CLK_FREQ/CLK_FREQ_OUT);
+
+    wire delayOut;
+    assign delayOut = ~(|counter);
+    assign delayWave = delayOut;
+
     always @ (posedge clk) begin
-        if (counter == 0) begin
-            sqwave <= ~sqwave;
-            counter <= ((CLK_FREQ/CLK_FREQ_OUT) / 2) - 1;
+        if (delayOut) begin
+            counter <= (CLK_FREQ/CLK_FREQ_OUT);
         end
         else
-            counter <= counter - 1;
+            counter <= counter - 1'b1;
     end
+
+
+    // ---------------------------------------------
+    reg [7:0] cntIn, cntOut;
+    wire binOut;
+    assign binOut = ~(|cntOut);
+    assign binWave = binOut;
+
+    always @ (posedge clk) begin
+        if (binOut)
+            cntIn <= switch; 
+            cntOut <= cntIn;
+        if (delayOut)
+            cntOut <= cntOut - 1'b1;
+    end
+
+    always @(switch) begin
+        cntOut <= cntIn;
+    end
+
+    // ---------------------------------------------
+
+    reg q;
+
+    always @ (posedge clk) begin
+        if (binOut)
+            q <= ~q;
+    end
+
+    assign wave = q;
     
 endmodule
-
-// module PWM_generator (PWM_ontime, PWM_out ,
-// clk , reset);
-
-// input clk, reset; // Port type declared
-// input [7:0] PWM_ontime; // 8-bit PWM input
-
-// output reg PWM_out; // 1 bit PWM output
-// wire [7:0] counter_out; // 8-bit counter
-// output
-
-// always @ (posedge clk)
-// begin
-// if (PWM_ontime > counter_out)
-// PWM_out <= 1;
-// else
-// PWM_out <= 0;
-// end
-// counter counter_inst(
-// .clk (clk),
-// .counter_out (counter_out),
-// .reset(reset)
-// );
-
-// endmodule
-
-// module counter(counter_out,clk,reset);
-
-// output [7:0] counter_out;
-// input clk, reset;
-// reg [7:0] counter_out;
-// always @(posedge clk)
-// if (reset)
-// counter_out <= 8'b0;
-// else
-// counter_out <= counter_out + 1;
-// endmodule

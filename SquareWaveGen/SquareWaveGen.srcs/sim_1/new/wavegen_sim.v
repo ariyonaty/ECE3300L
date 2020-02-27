@@ -27,15 +27,16 @@ module wavegen_sim();
     reg     clk;
     reg     [7:0] t;
     wire    wave;
+    wire    delayWave;
+    wire    binWave;
     
-//    wavegen #(delay)    uut (clk, t, wave);
-    sqwavegen uut (clk, t, wave);
+    sqwavegen uut (clk, t, delayWave, binWave, wave);
     
     always #1 clk = ~clk;
     
     initial begin
-            clk = 1;
-        #200 $stop;
+            clk = 0; t = 8'b00111000;
+        #400 $stop;
     end
 
 endmodule
