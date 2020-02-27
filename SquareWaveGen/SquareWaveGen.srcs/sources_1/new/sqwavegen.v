@@ -24,13 +24,14 @@ module sqwavegen
     (
         input       clk,
         input       [7:0] switch,
-        output      delayWave,
-        output      binWave,
-        output      wave);
+        output      wave );
     
     localparam CLK_FREQ = 100_000_000;
 
-    reg [7:0] counter = (CLK_FREQ/CLK_FREQ_OUT);
+
+    // Delay Counter
+
+    reg [7:0] counter = (CLK_FREQ/CLK_FREQ_OUT) - 1;
 
     wire delayOut;
     assign delayOut = ~(|counter);
@@ -38,40 +39,42 @@ module sqwavegen
 
     always @ (posedge clk) begin
         if (delayOut) begin
-            counter <= (CLK_FREQ/CLK_FREQ_OUT);
+            counter <= (CLK_FREQ/CLK_FREQ_OUT) - 1;
         end
         else
             counter <= counter - 1'b1;
     end
 
 
-    // ---------------------------------------------
+    // Binary Counter
+
     reg [7:0] cntIn, cntOut;
     wire binOut;
     assign binOut = ~(|cntOut);
     assign binWave = binOut;
 
+    initial cntOut = 0;
+    initial cntIn = 0;
+
     always @ (posedge clk) begin
-        if (binOut)
+        cntIn <= switch;
+        if (binOut) begin
             cntIn <= switch; 
             cntOut <= cntIn;
-        if (delayOut)
+        end
+        if (delayOut) begin
             cntOut <= cntOut - 1'b1;
+        end
     end
 
-    always @(switch) begin
-        cntOut <= cntIn;
-    end
+    // T Flip Flop
 
-    // ---------------------------------------------
-
-    reg q;
+    reg q = 1'b0;
+    assign wave = q;
 
     always @ (posedge clk) begin
         if (binOut)
             q <= ~q;
     end
-
-    assign wave = q;
     
 endmodule
