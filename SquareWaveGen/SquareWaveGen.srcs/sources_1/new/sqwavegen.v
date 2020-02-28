@@ -29,7 +29,10 @@ module sqwavegen
     localparam CLK_FREQ = 100_000_000;
 
 
-    // Delay Counter
+    /* 
+        Delay Counter:
+            Counts to 100 (99) 
+     */
 
     reg [7:0] counter = (CLK_FREQ/CLK_FREQ_OUT) - 1;
 
