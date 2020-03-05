@@ -34,7 +34,7 @@ module sqwavegen
             Counts to 100 (99) 
      */
 
-    reg [7:0] counter = (CLK_FREQ/CLK_FREQ_OUT) - 1;
+    reg [6:0] counter = (CLK_FREQ/CLK_FREQ_OUT) - 1;
 
     wire delayOut;
     assign delayOut = ~(|counter);

@@ -31,8 +31,9 @@ module wavegen_sim();
     always #1 clk = ~clk;
     
     initial begin
-                clk = 0; t = 8'b10000;
-        #1000   $stop;
+                t = 16;   clk = 0; 
+        #50000  t = 64;
+        #70000  t = 128;
     end
 
 endmodule
