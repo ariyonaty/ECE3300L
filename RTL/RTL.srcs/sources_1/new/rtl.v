@@ -38,14 +38,14 @@ module rtl
     
     always @(ALUS, A, B) begin
         case (ALUS)
-            3'b000: ALUOut = B;  
-            3'b001: ALUOut = A + B; 
-            3'b010: ALUOut = A - B;
-            3'b011: ALUOut = B - A;
-            3'b100: ALUOut = A & B;
-            3'b101: ALUOut = A | B;
-            3'b110: ALUOut = A ^ B;
-            3'b111: ALUOut = A; 
+            3'b000: ALUOut = B;                                 // Hold dataIn value
+            3'b001: ALUOut = A + B;                             // addition
+            3'b010: ALUOut = A - B;                             // subtraction
+            3'b011: ALUOut = B - A;                             // subtraction
+            3'b100: ALUOut = A & B;                             // and
+            3'b101: ALUOut = A | B;                             // or
+            3'b110: ALUOut = A ^ B;                             // xor
+            3'b111: ALUOut = A;                                 // hold dataOut value
         endcase        
     end
 

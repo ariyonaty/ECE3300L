@@ -35,7 +35,8 @@ module top
 
     /* 
         Delay counter block.
-        Counts to 50,000,000 and reset. 
+        Counts to 50,000,000 and resets.
+        Output is a 1Hz, or 1 second cycle. 
      */
     reg [26:0] counter;
     wire tick;
@@ -47,6 +48,14 @@ module top
             counter = 0;
         end
     end
+
+    /* 
+        RTL (register transfer level) block
+        Using pushbutton for execution, if 
+            button and clock pulse (every 1 sec)
+            RTL module enabled
+        Output is 4 bit value depending on the selects
+     */
 
     wire rtlEnable;
     assign rtlEnable = tick & ex;
@@ -60,6 +69,17 @@ module top
                 .clk(clk),
                 .dataOut(dataOut)
             );
+
+    /* 
+        DI (Display interface) block
+        Takes in 16 bit value from and outputs
+            to seven segments
+        Output shows:
+            dataIn (input data) on segment
+            segALUS (ALU select) on segment
+            segRS (Register select) on segment
+            dataOut (output data RTL) on segment    
+     */
 
     wire [3:0]segALUS;
     wire [3:0]segRS;
