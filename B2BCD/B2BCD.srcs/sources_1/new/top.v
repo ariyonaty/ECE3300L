@@ -31,19 +31,23 @@ module top
 
     wire[15:0] BCDOut;
 
-    b2bcd b1    (   .clk(clk),
-                    .binaryIn(binIn),
-                    .BCD(BCDOut)
-                );
+    b2bcd b1    
+        (   
+            .clk(clk),
+            .binaryIn(binIn),
+            .BCD(BCDOut)
+        );
 
-    displayInterface d1 (   .clk(clk),
-                            .D0(BCDOut[3:0]),
-                            .D1(BCDOut[7:4]),
-                            .D2(BCDOut[11:8]),
-                            .D3(BCDOut[15:12]),
-                            .dp(dp),
-                            .enable(enable),
-                            .seg(seg)
-                        );
+    displayInterface d1 
+        (
+            .clk(clk),
+            .D0(BCDOut[3:0]),
+            .D1(BCDOut[7:4]),
+            .D2(BCDOut[11:8]),
+            .D3(BCDOut[15:12]),
+            .dp(dp),
+            .enable(enable),
+            .seg(seg)
+        );
 
 endmodule

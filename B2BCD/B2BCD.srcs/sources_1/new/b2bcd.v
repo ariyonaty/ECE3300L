@@ -40,7 +40,7 @@ module b2bcd
             and down-counter from 12. 
             Z asserted when counter reaches zero. 
      */
-    reg [3:0] counter;
+    reg [3:0] counter = 12;
     assign z = ~(|counter);
     always @(posedge clk ) begin
         if (C3)
@@ -54,7 +54,7 @@ module b2bcd
             When C3 is asserted, reg R holds binary input value
             When C2 is asserted, reg R is shifted left
      */
-    reg [11:0] R;
+    reg [11:0] R = {12{1'b0}};
     always @(posedge clk ) begin
         if (C3)
             R <= binaryIn;
@@ -107,29 +107,35 @@ module b2bcd
             C2 - Shift left
             C3 - Initialization
      */
-    reg [1:0] state;
     parameter   S0 = 0,
                 S1 = 1,
                 S2 = 2;
+    reg [1:0] state = S0, next_state;
 
-    reg [3:0] C;
+    reg [3:0] C = 4'b1000;
     assign C3 = C[3];
     assign C2 = C[2];
     assign C1 = C[1];
     assign C0 = C[0]; 
 
-    always @(posedge clk ) begin                
+    always @(posedge clk) begin
+        state <= next_state;
+    end
+
+    always @(*) begin   // compute next state
         case (state)
-            S0:         state <= S1; 
-            S1: if (z)  state <= S0; else state <= S2;
-            S2:         state <= S1;
+            S0:         next_state <= S1; 
+            S1: if (z)  next_state <= S0; else next_state <= S2;
+            S2:         next_state <= S1;
+            default:    next_state <= S0;
         endcase
     end
-    always @ (*) begin
+    always @ (*) begin  // compute output
         case (state)
             S0:         C = 4'b1000;          
             S1: if (z)  C = 4'b0001; else C = 4'b0010;
             S2:         C = 4'b0100;
+            default:    C = 4'b0000;
         endcase
     end
 

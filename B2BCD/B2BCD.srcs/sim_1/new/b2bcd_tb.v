@@ -34,12 +34,13 @@ module b2bcd_tb();
     always #1 clk = ~clk;
 
     initial begin            
-            clk = 0;
-            binIn = 3456;
-        #50 binIn = 999;
-        #50 binIn = 75;
-        #50 binIn = 8;
-        #50 $finish;
+               clk = 0;
+               binIn = 3456;
+        #52    binIn = 999;
+        #52    binIn = 75;
+        #52    binIn = 8;
+        #52    binIn = 12'bx;
+        #52    $finish;
     end
 
 endmodule
