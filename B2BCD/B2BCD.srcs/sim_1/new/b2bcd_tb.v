@@ -24,7 +24,8 @@ module b2bcd_tb();
 
     reg     clk;
     reg     [11:0] binIn;
-    wire    [15:0] BCDout;
+    wire    [15:0] BCDout;.
+    0
 
     b2bcd   uut (   .clk(clk),
                     .binaryIn(binIn),
