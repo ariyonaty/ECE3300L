@@ -49,8 +49,8 @@ module lfsr_tb();
     always #1 clk = ~clk;
 
     initial begin
-            load = 1; enable = 0; seed = 2500;  clk = 1;
-        #2  load = 0; enable = 1; seed = 12'bx;
+            load = 1; seed = 500;   enable = 1; clk = 1;
+        #2  load = 0; seed = 12'bx;
         #20 $stop;  
     end
 

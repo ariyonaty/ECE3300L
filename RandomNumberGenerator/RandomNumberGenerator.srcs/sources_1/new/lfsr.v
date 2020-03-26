@@ -33,16 +33,14 @@ module lfsr
     );
 
     always @(posedge clk ) begin
-        if (load) begin                                                 // if load --> randNum initialized with seed
-            randNum <= seed;
-        end else if (enable) begin                                      // if enable --> LFSR begins to operate
-            if (randNum[0]) begin                                       // if LSB is a '1' --> Shift rotate right. 
-                randNum <= {randNum[0], randNum[(WIDTH-1):1]} ^ POLY;   //  THEN, XOR with polynomial
+        if (enable) begin                                                   // if enable --> LFSR begins to operate
+            if (load) begin                                                 // if load --> randNum initialized with seed
+                randNum <= seed;
+            end else if (randNum[0]) begin                                  // if LSB is a '1' --> Shift rotate right.
+                randNum <= {randNum[0], randNum[(WIDTH-1):1]} ^ POLY;       //  THEN, XOR with polynomial
             end else begin
-                randNum <= {randNum[0], randNum[(WIDTH-1):1]};          // Otherwise, simplfy Shift rotate right
+                randNum <= {randNum[0], randNum[(WIDTH-1):1]};              // Otherwise, simplfy Shift rotate right
             end
-        end else begin
-            randNum <= randNum;
         end
     end
 
