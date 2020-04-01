@@ -41,11 +41,11 @@ module multiplier_tb();
 
     initial begin
             multiplier = 5;     multiplicand = 10; clk = 0; go = 1; #6 go = 0;
-        #70 multiplier = 55;    multiplicand = 55;          go = 1; #6 go = 0;
-        #70 multiplier = 50;    multiplicand = 20;          go = 1; #6 go = 0;
-        #70 multiplier = 33;    multiplicand = 11;          go = 0; #6 go = 0;
-        #70 multiplier = 40;    multiplicand = 0;           go = 0; #6 go = 0;
-        #70 multiplier = 11;    multiplicand = 60;          go = 0; #6 go = 0;
+        #70 multiplier = 55;    multiplicand = 55;          go = 1; //#2 go = 0;
+        #70 multiplier = 50;    multiplicand = 20;          go = 1; //#2 go = 0;
+        #70 multiplier = 33;    multiplicand = 11;          go = 1; //#2 go = 0;
+        #70 multiplier = 40;    multiplicand = 0;           go = 1; //#2 go = 0;
+        #70 multiplier = 11;    multiplicand = 60;          go = 1; //#2 go = 0;
         #70 $stop;
     end
 

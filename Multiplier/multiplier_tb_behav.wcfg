@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="multiplier_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="multiplier_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="167301819fs"></ZoomEndTime>
+      <Cursor1Time time="269929000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="115"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject type="logic" fp_name="/multiplier_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/multiplier_tb/go">
+      <obj_property name="ElementShortName">go</obj_property>
+      <obj_property name="ObjectShortName">go</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/multiplier">
+      <obj_property name="ElementShortName">multiplier[5:0]</obj_property>
+      <obj_property name="ObjectShortName">multiplier[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/multiplicand">
+      <obj_property name="ElementShortName">multiplicand[5:0]</obj_property>
+      <obj_property name="ObjectShortName">multiplicand[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/product">
+      <obj_property name="ElementShortName">product[11:0]</obj_property>
+      <obj_property name="ObjectShortName">product[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/multiplier_tb/uut/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/multiplier_tb/uut/next_state">
+      <obj_property name="ElementShortName">next_state</obj_property>
+      <obj_property name="ObjectShortName">next_state</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/uut/C">
+      <obj_property name="ElementShortName">C[2:0]</obj_property>
+      <obj_property name="ObjectShortName">C[2:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/uut/multiplierReg">
+      <obj_property name="ElementShortName">multiplierReg[5:0]</obj_property>
+      <obj_property name="ObjectShortName">multiplierReg[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/uut/multiplicandReg">
+      <obj_property name="ElementShortName">multiplicandReg[11:0]</obj_property>
+      <obj_property name="ObjectShortName">multiplicandReg[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/multiplier_tb/uut/PI">
+      <obj_property name="ElementShortName">PI[11:0]</obj_property>
+      <obj_property name="ObjectShortName">PI[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/multiplier_tb/uut/zed">
+      <obj_property name="ElementShortName">zed</obj_property>
+      <obj_property name="ObjectShortName">zed</obj_property>
+   </wvobject>
+</wave_config>
