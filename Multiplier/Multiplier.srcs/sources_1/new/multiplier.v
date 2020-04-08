@@ -43,7 +43,7 @@ module multiplier
     end
 
     always @(state or go or zed) begin                  // compute next state and output
-        case (state)
+        case (state)                                    // Mealy: {go, zed} / {C2 C1 C0}
             S0: 
                 if (go) begin
                     next_state = S1;
@@ -60,11 +60,15 @@ module multiplier
                     next_state = S1;
                     C = 3'b010;
                 end
-            default: next_state = S0;          
+            default: 
+                begin
+                    next_state = S0;
+                    C = 3'b000;
+                end      
         endcase
     end
 
-    reg [5:0] multiplierReg;                            //  Creates initial copy of multiplier
+    reg [5:0] multiplierReg;                            //  Creates initial copy of multiplier                  // 'A' block on handout
     assign zed = ~(|multiplierReg);                     //  zed asserted when multiplier reg is zero
     always @(posedge clk) begin                         //  
         if (C0)                                         //  if C0, load multiplier value (switch) to register
@@ -73,19 +77,18 @@ module multiplier
             multiplierReg <= multiplierReg - 1;         //
     end
     
-    reg [11:0] multiplicandReg;                         
-    reg [11:0] PI;
+    reg [11:0] multiplicandReg;                         //  Creates initial register of multiplicand value      // 'B' block on handout
+    reg [11:0] PI;                                      
     always @(posedge clk) begin
-        if (C0) begin
-            multiplicandReg <= {6'd0, multiplicand};
+        if (C0) begin                                   
+            multiplicandReg <= {6'b0, multiplicand};
             PI <= 0;
-        end
-        if (C1) begin
+        end else if (C1) begin
             PI <= multiplicandReg + PI;
+        end else if (C2) begin
+            product <= PI;             
         end
-        if (C2) begin
-            product <= PI; 
-        end
+
     end
 
 endmodule

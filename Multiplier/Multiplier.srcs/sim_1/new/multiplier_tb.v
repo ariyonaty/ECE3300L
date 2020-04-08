@@ -37,16 +37,16 @@ module multiplier_tb();
         .product(product)
     );
 
-    always #1 clk = ~clk;
+    always #0.5 clk = ~clk;
 
     initial begin
-            multiplier = 5;     multiplicand = 10; clk = 0; go = 1; #6 go = 0;
-        #70 multiplier = 55;    multiplicand = 55;          go = 1; //#2 go = 0;
-        #70 multiplier = 50;    multiplicand = 20;          go = 1; //#2 go = 0;
-        #70 multiplier = 33;    multiplicand = 11;          go = 1; //#2 go = 0;
-        #70 multiplier = 40;    multiplicand = 0;           go = 1; //#2 go = 0;
-        #70 multiplier = 11;    multiplicand = 60;          go = 1; //#2 go = 0;
-        #70 $stop;
+                multiplier = 5;     multiplicand = 10; clk = 0; go = 1; #4 go = 0;
+        #100    multiplier = 55;    multiplicand = 55;          go = 1; #4 go = 0;
+        #100    multiplier = 50;    multiplicand = 20;          go = 1; #4 go = 0;
+        #100    multiplier = 33;    multiplicand = 11;          go = 1; #4 go = 0;
+        #100    multiplier = 40;    multiplicand = 0;           go = 1; #4 go = 0;
+        #100    multiplier = 11;    multiplicand = 60;          go = 1; #4 go = 0;
+        #100    $stop;
     end
 
 endmodule
