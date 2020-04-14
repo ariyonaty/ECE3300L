@@ -39,9 +39,23 @@ module divider_tb();
 
     initial begin
             clk = 0;
-            div = 1; divisor = 10; dividend = 55;
-        #8  div = 0;
-        #100 $stop;
+            div = 1; divisor = 5; dividend = 200;
+        #4  div = 0;
+        #30 div = 1; divisor = 1; dividend = 55;
+        #4  div = 0;
+        #30 div = 1; divisor = 11; dividend = 90;
+        #4  div = 0;
+        #30 div = 1; divisor = 55; dividend = 100;
+        #4  div = 0;
+        #30 $stop;
     end
 
 endmodule
+
+/* 
+    initial begin
+            clk = 0;
+            div = 1; divisor = 5; dividend = 200;
+        #4  div = 0;
+        #30 $stop;
+    end */

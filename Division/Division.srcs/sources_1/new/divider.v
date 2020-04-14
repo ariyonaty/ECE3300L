@@ -39,26 +39,26 @@ module divider
     assign C2 = C[2];
     assign C3 = C[3];
 
-    always @(posedge clk) begin
+    always @(posedge clk) begin             // update state
         state <= next_state;
     end
 
-    always @(*) begin
+    always @(*) begin                       // state machine ; mealy
         case (state)
-            S0:
-                if (go) begin
-                    next_state = S1;
-                    C = 4'b0011;
-                end else begin
-                    next_state = S0;
-                    C = 4'b0000;
+            S0:             
+                if (go) begin               // if go asserted, 
+                    next_state = S1;        //  proceed to state 1
+                    C = 4'b0011;            //  init and load registers
+                end else begin              // otherwise
+                    next_state = S0;        //  remain in state 0
+                    C = 4'b0000;        
                 end
-            S1: 
-                if (BLA) begin
-                    next_state = S0;
-                    C = 4'b1000;
-                end else begin
-                    next_state = S1;
+            S1:                             
+                if (BLA) begin              // if BLA asserted,
+                    next_state = S0;        //  proceed to state 0
+                    C = 4'b1000;            //  load quotient reg 
+                end else begin              // otherwise
+                    next_state = S1;        //  remain in state 1
                     C = 4'b0110;
                 end
             default: begin
@@ -69,30 +69,33 @@ module divider
     end
 
     reg [7:0] A, B, PA;
-    reg blaReg = 1'b0;
+    reg blaReg;
     assign go = (div & (|divisor));
     assign BLA = blaReg;
 
-    always @(posedge clk) begin
-        if (C0)
-            A <= divisor;
-        if (C1) begin
-            if (C0)
-                B <= dividend;
-            else
-                B <= PA;
+    always @(posedge clk) begin         
+        if (C0)                         // if C0 asserted
+            A <= divisor;               //  load reg A with dvsr input    
+        if (C1) begin                   // if C1 asserted
+            if (C0)                     //  2-to-1 mux
+                B <= dividend;          //  C0 = 1 --> B = dvdnd input    
+            else                        //  C0 = 0 --> B = subtraction
+                B <= PA;                //
         end
-        {blaReg, PA} <= ~A + B + 1'b1;
+    end
+
+    always @(*) begin                   // subtractor block
+        {blaReg, PA} <= ~A + B + 1'b1;  // takes the '2's comp'
     end
 
     reg [7:0] QI;
-    always @(posedge clk) begin
-        if (C0)
-            QI <= 0;
-        if (C2)
-            QI <= QI + 1'b1;
-        if (C3)
-            quotient <= QI;
+    always @(posedge clk) begin         // Quotient increment
+        if (C0)                         // if C0
+            QI <= 0;                    //  reset to 0
+        if (C2)                         // if C2 (aka state 2)
+            QI <= QI + 1'b1;            // increment by 1
+        if (C3)                         // if C3 (aka rmndr < dvsr)
+            quotient <= QI;             // load quotient w/ incr. value
     end
 
 endmodule
