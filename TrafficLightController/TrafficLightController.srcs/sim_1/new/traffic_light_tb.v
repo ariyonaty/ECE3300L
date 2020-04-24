@@ -40,7 +40,7 @@ module traffic_light_tb();
     initial begin
             clk = 0;
         #6  sensor = 1;
-        #80 $stop;    
+        #77 $stop;    
     end
  
 endmodule
