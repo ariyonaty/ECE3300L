@@ -44,4 +44,4 @@ module top
         .EW(EW)
     );
 
-endmodule
+endmodule // top

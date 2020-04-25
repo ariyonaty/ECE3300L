@@ -19,6 +19,11 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+`define DELAY_2     2
+`define DELAY_4     4
+`define DELAY_5     5
+`define DELAY_10    10
+`define DELAY_15    15
 
 module traffic_light
     (
@@ -29,21 +34,17 @@ module traffic_light
     );
 
     reg [2:0] state, next_state;
-    parameter [2:0] S0 = 0,         // NS = R ; EW = G 
-                    S1 = 1,         // NS = R ; EW = Y
-                    S2 = 2,         // NS = R ; EW = R
-                    S3 = 3,         // NS = G ; EW = R
-                    S4 = 4,         // NS = Y ; EW = R
-                    S5 = 5,         // NS = R ; EW = R
-                    S6 = 6;         // NS = R ; EW = G
+    parameter [2:0] S0 = 0,                 // NS = R ; EW = G 
+                    S1 = 1,                 // NS = R ; EW = Y
+                    S2 = 2,                 // NS = R ; EW = R
+                    S3 = 3,                 // NS = G ; EW = R
+                    S4 = 4,                 // NS = Y ; EW = R
+                    S5 = 5,                 // NS = R ; EW = R
+                    S6 = 6;                 // NS = R ; EW = G
 
     reg [3:0] counter;
 
-    // always @(posedge clk) begin
-    //     state <= next_state;
-    // end
-
-    always @(posedge clk) begin
+    always @(posedge clk) begin             // computes state transitions
         case (state)
             S0: begin
                     if (sensor > 0) begin
@@ -55,7 +56,7 @@ module traffic_light
                 end  
             S1: begin
                     counter = counter + 1;
-                    if (counter == 5) begin
+                    if (counter == `DELAY_5) begin
                         counter = 0;
                         state = S2;
                     end else begin
@@ -64,7 +65,7 @@ module traffic_light
                 end
             S2: begin
                     counter = counter + 1;
-                    if (counter == 2) begin
+                    if (counter == `DELAY_2) begin
                         counter = 0;
                         state = S3;
                     end else begin
@@ -73,7 +74,7 @@ module traffic_light
                 end
             S3: begin
                     counter = counter + 1;
-                    if (counter == 10) begin
+                    if (counter == `DELAY_10) begin
                         counter = 0;
                         state = S4;
                     end else begin
@@ -82,7 +83,7 @@ module traffic_light
                 end
             S4: begin
                     counter = counter + 1;
-                    if (counter == 4) begin
+                    if (counter == `DELAY_4) begin
                         counter = 0;
                         state = S5;
                     end else begin
@@ -91,7 +92,7 @@ module traffic_light
                 end
             S5: begin
                     counter = counter + 1;
-                    if (counter == 2) begin
+                    if (counter == `DELAY_2) begin
                         counter = 0;
                         state = S6;
                     end else begin
@@ -100,7 +101,7 @@ module traffic_light
                 end
             S6: begin
                     counter = counter + 1;
-                    if (counter == 15) begin
+                    if (counter == `DELAY_15) begin
                         counter = 0;
                         state = S0;
                     end else begin
@@ -114,36 +115,36 @@ module traffic_light
     always @(*) begin                           // computes output
         case (state)
             S0: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b001;    //  Green
-                end  
-            S1: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b010;    //  Yellow
-                end
-            S2: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b100;    //  Red
-                end
-            S3: begin
-                    NS = 3'b001;    //  Green
-                    EW = 3'b100;    //  Red
-                end
-            S4: begin
-                    NS = 3'b010;    //  Yellow
-                    EW = 3'b100;    //  Red
-                end
-            S5: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b100;    //  Red
-                end
-            S6: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b001;    //  Green
-                end
-            default: begin
-                    NS = 3'b100;    //  Red
-                    EW = 3'b001;    //  Green
+                    NS = 3'b100;                //  Red
+                    EW = 3'b001;                //  Green
+                end             
+            S1: begin           
+                    NS = 3'b100;                //  Red
+                    EW = 3'b010;                //  Yellow
+                end         
+            S2: begin           
+                    NS = 3'b100;                //  Red
+                    EW = 3'b100;                //  Red
+                end         
+            S3: begin           
+                    NS = 3'b001;                //  Green
+                    EW = 3'b100;                //  Red
+                end         
+            S4: begin           
+                    NS = 3'b010;                //  Yellow
+                    EW = 3'b100;                //  Red
+                end         
+            S5: begin           
+                    NS = 3'b100;                //  Red
+                    EW = 3'b100;                //  Red
+                end         
+            S6: begin           
+                    NS = 3'b100;                //  Red
+                    EW = 3'b001;                //  Green
+                end         
+            default: begin          
+                    NS = 3'b100;                //  Red
+                    EW = 3'b001;                //  Green
                 end
         endcase
     end
