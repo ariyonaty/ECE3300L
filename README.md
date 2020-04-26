@@ -32,3 +32,4 @@ Disclaimer: These programs are written by me. Feel free to take the code and mod
   - .bit    :   bitstream file to simply upload to board
   - .wcfg   :   waveform configuration used for simulation
   - .png    :   capture of waveform simulation
+  - .pdf    :   pdf of RTL analysis schematic
