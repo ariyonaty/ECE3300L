@@ -19,6 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+/* Takes 100 MHz clock in and outputs a 1 Hz clock */
 module clock_gen(
         input       clk_in,
         output reg  clk_out

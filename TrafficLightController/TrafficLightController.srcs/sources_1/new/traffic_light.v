@@ -33,7 +33,7 @@ module traffic_light
         output reg  [2:0] EW
     );
 
-    reg [2:0] state, next_state;
+    reg [2:0] state;
     parameter [2:0] S0 = 0,                 // NS = R ; EW = G 
                     S1 = 1,                 // NS = R ; EW = Y
                     S2 = 2,                 // NS = R ; EW = R
@@ -48,67 +48,67 @@ module traffic_light
         case (state)
             S0: begin
                     if (sensor > 0) begin
-                        counter = 0;
-                        state = S1;
+                        counter <= 0;
+                        state <= S1;
                     end else begin
-                        state = S0;
+                        state <= S0;
                     end
                 end  
             S1: begin
-                    counter = counter + 1;
+                    counter <= counter + 1;
                     if (counter == `DELAY_5) begin
-                        counter = 0;
-                        state = S2;
+                        counter <= 0;
+                        state <= S2;
                     end else begin
-                        state = S1;
+                        state <= S1;
                     end
                 end
             S2: begin
-                    counter = counter + 1;
+                    counter <= counter + 1;
                     if (counter == `DELAY_2) begin
-                        counter = 0;
-                        state = S3;
+                        counter <= 0;
+                        state <= S3;
                     end else begin
-                        state = S2;
+                        state <= S2;
                     end                
                 end
             S3: begin
-                    counter = counter + 1;
+                    counter <= counter + 1;
                     if (counter == `DELAY_10) begin
-                        counter = 0;
-                        state = S4;
+                        counter <=0;
+                        state <=S4;
                     end else begin
-                        state = S3;
+                        state <=S3;
                     end                
                 end
             S4: begin
-                    counter = counter + 1;
+                    counter <=counter + 1;
                     if (counter == `DELAY_4) begin
-                        counter = 0;
-                        state = S5;
+                        counter <=0;
+                        state <=S5;
                     end else begin
-                        state = S4;
+                        state <=S4;
                     end                
                 end
             S5: begin
-                    counter = counter + 1;
+                    counter <=counter + 1;
                     if (counter == `DELAY_2) begin
-                        counter = 0;
-                        state = S6;
+                        counter <=0;
+                        state <=S6;
                     end else begin
-                        state = S5;
+                        state <=S5;
                     end                
                 end
             S6: begin
-                    counter = counter + 1;
+                    counter <=counter + 1;
                     if (counter == `DELAY_15) begin
-                        counter = 0;
-                        state = S0;
+                        counter <=0;
+                        state <=S0;
                     end else begin
-                        state = S6;
+                        state <=S6;
                     end                
                 end
-            default:    state = S0;
+            default:    state <=S0;
         endcase
     end
 
@@ -148,7 +148,5 @@ module traffic_light
                 end
         endcase
     end
-
-
 
 endmodule // traffic_light
