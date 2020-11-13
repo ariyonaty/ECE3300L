@@ -26,7 +26,7 @@ Disclaimer: These programs are written by me. Feel free to take the code and mod
   
 ### Note to reader
   Simply cloning the projects no longer works. 
-  I have edited .gitignore to only include .v .xdc .bit files
+  I have edited .gitignore to only include:
   - .v      :   verilog files
   - .xdc    :   board constraint file
   - .bit    :   bitstream file to simply upload to board
